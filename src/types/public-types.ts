@@ -129,6 +129,10 @@ export interface StylingOption {
    * Function to get custom color for day columns. If provided, each day column will use the returned color.
    */
   getDayColumnColor?: (date: Date) => string | undefined;
+  /**
+   * Border color for selected day column. Works in combination with getDayColumnColor.
+   */
+  selectedDayBorderColor?: string;
   TooltipContent?: React.FC<{
     task: Task;
     fontSize: string;

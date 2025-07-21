@@ -12,6 +12,7 @@ export type GridBodyProps = {
   todayColor: string;
   rtl: boolean;
   getDayColumnColor?: (date: Date) => string | undefined;
+  selectedDayBorderColor?: string;
 };
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
@@ -22,6 +23,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   todayColor,
   rtl,
   getDayColumnColor,
+  selectedDayBorderColor,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -63,6 +65,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   let tickX = 0;
   const ticks: ReactChild[] = [];
   const dayColumns: ReactChild[] = [];
+  const dayBorders: ReactChild[] = [];
   let today: ReactChild = <rect />;
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
@@ -91,6 +94,23 @@ export const GridBody: React.FC<GridBodyProps> = ({
             fill={customColor}
           />
         );
+
+        // Add border for selected day if selectedDayBorderColor is provided
+        if (selectedDayBorderColor) {
+          dayBorders.push(
+            <rect
+              key={`day-border-${date.getTime()}`}
+              x={tickX}
+              y={0}
+              width={columnWidth}
+              height={y}
+              fill="none"
+              stroke={selectedDayBorderColor}
+              strokeWidth="2"
+              className="selected-day-border"
+            />
+          );
+        }
       }
     }
 
@@ -143,6 +163,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
       <g className="rowLines">{rowLines}</g>
       <g className="ticks">{ticks}</g>
       <g className="dayColumns">{dayColumns}</g>
+      <g className="dayBorders">{dayBorders}</g>
       <g className="today">{today}</g>
     </g>
   );
