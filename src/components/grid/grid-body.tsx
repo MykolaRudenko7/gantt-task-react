@@ -13,6 +13,7 @@ export type GridBodyProps = {
   rtl: boolean;
   getDayColumnColor?: (date: Date) => string | undefined;
   selectedDayBorderColor?: string;
+  getProjectRowColor?: (task: Task) => string | undefined;
 };
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
@@ -24,6 +25,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   rtl,
   getDayColumnColor,
   selectedDayBorderColor,
+  getProjectRowColor,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -38,6 +40,9 @@ export const GridBody: React.FC<GridBodyProps> = ({
     />,
   ];
   for (const task of tasks) {
+    // Check if this is a project row and if custom color is provided
+    const projectRowColor = getProjectRowColor && task.type === 'project' ? getProjectRowColor(task) : undefined;
+    
     gridRows.push(
       <rect
         key={"Row" + task.id}
@@ -46,6 +51,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
         width={svgWidth}
         height={rowHeight}
         className={styles.gridRow}
+        fill={projectRowColor || undefined}
       />
     );
     rowLines.push(

@@ -16,6 +16,7 @@ export type TaskItemProps = {
   isDelete: boolean;
   isSelected: boolean;
   rtl: boolean;
+  getTaskBorderColor?: (task: any) => string | undefined;
   onEventStart: (
     action: GanttContentMoveAction,
     selectedTask: BarTask,

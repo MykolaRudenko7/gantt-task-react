@@ -133,6 +133,14 @@ export interface StylingOption {
    * Border color for selected day column. Works in combination with getDayColumnColor.
    */
   selectedDayBorderColor?: string;
+  /**
+   * Function to get custom border color for task bars. If provided, each task bar will use the returned border color.
+   */
+  getTaskBorderColor?: (task: Task) => string | undefined;
+  /**
+   * Function to get custom background color for project/group rows. If provided, project rows will be filled with the returned color.
+   */
+  getProjectRowColor?: (task: Task) => string | undefined;
   TooltipContent?: React.FC<{
     task: Task;
     fontSize: string;

@@ -13,6 +13,7 @@ export const Bar: React.FC<TaskItemProps> = ({
   rtl,
   onEventStart,
   isSelected,
+  getTaskBorderColor,
 }) => {
   const progressPoint = getProgressPoint(
     +!rtl * task.progressWidth + task.progressX,
@@ -32,6 +33,8 @@ export const Bar: React.FC<TaskItemProps> = ({
         barCornerRadius={task.barCornerRadius}
         styles={task.styles}
         isSelected={isSelected}
+        task={task}
+        getTaskBorderColor={getTaskBorderColor}
         onMouseDown={e => {
           isDateChangeable && onEventStart("move", task, e);
         }}

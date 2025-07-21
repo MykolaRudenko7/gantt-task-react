@@ -56,6 +56,8 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   todayColor = "rgba(252, 248, 227, 0.5)",
   getDayColumnColor,
   selectedDayBorderColor,
+  getTaskBorderColor,
+  getProjectRowColor,
   viewDate,
   TooltipContent = StandardTooltipContent,
   TaskListHeader = TaskListHeaderDefault,
@@ -399,6 +401,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     rtl,
     getDayColumnColor,
     selectedDayBorderColor,
+    getProjectRowColor,
   };
   const calendarProps: CalendarProps = {
     dateSetup,
@@ -428,6 +431,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     setGanttEvent,
     setFailedTask,
     setSelectedTask: handleSelectedTask,
+    getTaskBorderColor,
     onDateChange,
     onProgressChange,
     onDoubleClick,

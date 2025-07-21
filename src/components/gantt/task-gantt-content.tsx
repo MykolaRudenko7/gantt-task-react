@@ -30,6 +30,7 @@ export type TaskGanttContentProps = {
   setGanttEvent: (value: GanttEvent) => void;
   setFailedTask: (value: BarTask | null) => void;
   setSelectedTask: (taskId: string) => void;
+  getTaskBorderColor?: (task: any) => string | undefined;
 } & EventOption;
 
 export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
@@ -50,6 +51,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
   setGanttEvent,
   setFailedTask,
   setSelectedTask,
+  getTaskBorderColor,
   onDateChange,
   onProgressChange,
   onDoubleClick,
@@ -293,6 +295,7 @@ export const TaskGanttContent: React.FC<TaskGanttContentProps> = ({
               key={task.id}
               isSelected={!!selectedTask && task.id === selectedTask.id}
               rtl={rtl}
+              getTaskBorderColor={getTaskBorderColor}
             />
           );
         })}
