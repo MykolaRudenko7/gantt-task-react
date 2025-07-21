@@ -69,8 +69,8 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
         ry={barCornerRadius}
         rx={barCornerRadius}
         fill={getProcessColor()}
-        stroke={borderColor}
-        strokeWidth={2}
+        stroke="none"
+        strokeWidth={0}
       />
     </g>
   );
