@@ -43,6 +43,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
     // Check if this is a project row and if custom color is provided
     const projectRowColor = getProjectRowColor && task.type === 'project' ? getProjectRowColor(task) : undefined;
     
+    const isProject = task.type === 'project';
     gridRows.push(
       <rect
         key={"Row" + task.id}
@@ -51,8 +52,10 @@ export const GridBody: React.FC<GridBodyProps> = ({
         width={svgWidth}
         height={rowHeight}
         className={styles.gridRow}
-        fill={projectRowColor || undefined}
-        style={projectRowColor ? { fill: `${projectRowColor} !important` } : undefined}
+        fill={isProject && projectRowColor ? projectRowColor : undefined}
+        data-task-type={task.type}
+        data-project-row={isProject ? 'true' : undefined}
+        style={isProject && projectRowColor ? { fill: `${projectRowColor} !important` } : undefined}
       />
     );
     rowLines.push(
