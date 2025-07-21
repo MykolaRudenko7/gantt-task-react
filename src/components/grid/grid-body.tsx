@@ -11,6 +11,7 @@ export type GridBodyProps = {
   columnWidth: number;
   todayColor: string;
   rtl: boolean;
+  getDayColumnColor?: (date: Date) => string | undefined;
 };
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
@@ -20,6 +21,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   columnWidth,
   todayColor,
   rtl,
+  getDayColumnColor,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -60,6 +62,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   const now = new Date();
   let tickX = 0;
   const ticks: ReactChild[] = [];
+  const dayColumns: ReactChild[] = [];
   let today: ReactChild = <rect />;
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
@@ -73,6 +76,24 @@ export const GridBody: React.FC<GridBodyProps> = ({
         className={styles.gridTick}
       />
     );
+
+    // Add custom day column color if getDayColumnColor is provided
+    if (getDayColumnColor) {
+      const customColor = getDayColumnColor(date);
+      if (customColor) {
+        dayColumns.push(
+          <rect
+            key={`day-column-${date.getTime()}`}
+            x={tickX}
+            y={0}
+            width={columnWidth}
+            height={y}
+            fill={customColor}
+          />
+        );
+      }
+    }
+
     if (
       (i + 1 !== dates.length &&
         date.getTime() < now.getTime() &&
@@ -121,6 +142,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
       <g className="rows">{gridRows}</g>
       <g className="rowLines">{rowLines}</g>
       <g className="ticks">{ticks}</g>
+      <g className="dayColumns">{dayColumns}</g>
       <g className="today">{today}</g>
     </g>
   );

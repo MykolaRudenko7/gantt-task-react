@@ -77,6 +77,10 @@ export interface EventOption {
 export interface DisplayOption {
   viewMode?: ViewMode;
   viewDate?: Date;
+  /**
+   * Specifies the date that should be highlighted on the time grid. If not provided, the component will highlight the current date (today) as before.
+   */
+  highlightDate?: Date;
   preStepsCount?: number;
   /**
    * Specifies the month name language. Able formats: ISO 639-2, Java Locale
@@ -113,6 +117,18 @@ export interface StylingOption {
   arrowColor?: string;
   arrowIndent?: number;
   todayColor?: string;
+  /**
+   * Color used to highlight the selected (active) day. When not provided, the component falls back to todayColor.
+   */
+  highlightColor?: string;
+  /**
+   * Defines the highlight style for the selected day. "fill" (default) draws a filled rectangle, "border" draws only an outline.
+   */
+  highlightStyle?: "fill" | "border";
+  /**
+   * Function to get custom color for day columns. If provided, each day column will use the returned color.
+   */
+  getDayColumnColor?: (date: Date) => string | undefined;
   TooltipContent?: React.FC<{
     task: Task;
     fontSize: string;
