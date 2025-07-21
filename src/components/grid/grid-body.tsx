@@ -52,6 +52,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
         height={rowHeight}
         className={styles.gridRow}
         fill={projectRowColor || undefined}
+        style={projectRowColor ? { fill: projectRowColor } : undefined}
       />
     );
     rowLines.push(

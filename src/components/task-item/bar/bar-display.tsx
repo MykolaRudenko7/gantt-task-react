@@ -44,6 +44,8 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
   };
 
   const customBorderColor = getTaskBorderColor && task ? getTaskBorderColor(task) : undefined;
+  // Використовуємо колір прогресу як бордер, якщо кастомний бордер не заданий
+  const borderColor = customBorderColor || getProcessColor();
 
   return (
     <g onMouseDown={onMouseDown}>
@@ -55,8 +57,8 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
         ry={barCornerRadius}
         rx={barCornerRadius}
         fill={getBarColor()}
-        stroke={customBorderColor}
-        strokeWidth={customBorderColor ? 2 : undefined}
+        stroke={borderColor}
+        strokeWidth={2}
         className={style.barBackground}
       />
       <rect
@@ -67,8 +69,8 @@ export const BarDisplay: React.FC<BarDisplayProps> = ({
         ry={barCornerRadius}
         rx={barCornerRadius}
         fill={getProcessColor()}
-        stroke={customBorderColor}
-        strokeWidth={customBorderColor ? 2 : undefined}
+        stroke={borderColor}
+        strokeWidth={2}
       />
     </g>
   );
